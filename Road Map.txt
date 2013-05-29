@@ -1,0 +1,28 @@
+Tab Trunk Roadmap
+
+
+v 0.0
+	empty files
+	
+v 0.1
+	list all tabs
+	view in detail a tab
+	create a tab (artist, name, url, content)
+	edit a tab
+	delete a tab
+
+v 0.2
+	ability is an attribute of Tab now 	- done 5/23/13
+	authentication (no registration) - done 5/26/13
+	base template - done 5/26/13
+	tabular view of tabs
+
+
+
+Future Versions
+
+	tabs belong to a user, not system
+	new UI (jquery + css)
+	branding
+	minor fixes
+	published!

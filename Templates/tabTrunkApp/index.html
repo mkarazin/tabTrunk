@@ -1,0 +1,62 @@
+{% extends 'tabTrunkApp/base.html' %}
+{% load url from future %}
+
+{% block optional_scripts %}
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#tabTable').dataTable();
+			} );
+		</script>
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'new' %}">new</a>
+{% if tab_list %}
+    <ul>
+    {% for tab in tab_list %}
+        <li><a href="{% url 'detail' tab.id %}">{{ tab.songTitle }}</a></li>
+    {% endfor %}
+    </ul>
+    <div class="container" style="margin-top: 10px">
+		<div id="tabTable_wrapper" class="dataTables_wrapper form-inline" role="grid">
+			<div class="span6">
+				<div id="example_length" class="dataTables_length">
+				<label>
+				<select size="1" name="example_length" aria-controls="example">
+					<option value="10" selected="selected">10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+				records per page
+				</label>
+				</div>
+			</div>
+			<table id="tabTable">
+				<thread>
+					<tr>
+						<th>Artist</th>
+						<th>Song Title</th>
+						<th>Ability</th>
+					 </tr>
+				</thead>
+				<tbody>
+					{% for tab in tab_list %}
+					<tr>
+						<td>{{ tab.artist }}<td>
+						<td>{{ tab.songTitle }}</td>
+						<td>{{ tab.get_ability_display }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>    
+			</table>
+		</div>
+    </div>
+    
+{% else %}
+    <p>No tabs are available.</p>
+{% endif %}
+
+{% endblock %}

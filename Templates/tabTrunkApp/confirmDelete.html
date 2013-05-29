@@ -1,0 +1,32 @@
+{% extends 'tabTrunkApp/base.html' %}
+{% load url from future %}
+
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<p>
+Confirm delete of:<br>
+{{ tab.songTitle }} - {{ tab.artist }}<br>
+</p>
+
+<p>
+<form action="/tabs/delete/{{ tab.id }}/" method="post">
+{% csrf_token  %}
+
+<input name="submit" id="submit" type="submit" value="delete" />
+<input name="submit" id="submit" type="submit" value="cancel" />
+</form>
+</p>
+
+{% if tab %}
+
+
+
+
+{% else %}
+
+{% endif %}
+
+{% endblock %}

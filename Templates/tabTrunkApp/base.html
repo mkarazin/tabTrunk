@@ -1,0 +1,41 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>
+{% block head_title %}
+TAB TRUNK
+{% endblock %}
+</title>
+
+{% block main_scripts %}
+<!--
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery-2.0.1.js"></script>
+-->
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery.js"></script>
+{% endblock %}
+
+{% block optional_scripts %}
+{% endblock %}
+
+</head>
+
+
+<body>
+
+{% block top_nav %}
+<a href="{% url 'index' %}">home</a> | <a href="/accounts/logout/">logout</a>
+{% endblock %}
+<hr>
+
+{% block content %}
+
+{% endblock %}
+
+<hr>
+{% block footer %}
+tabTrunk
+{% endblock %} 
+</body>
+</html>

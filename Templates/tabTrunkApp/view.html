@@ -1,0 +1,30 @@
+{% extends 'tabTrunkApp/base.html' %}
+{% load url from future %}
+
+
+{% block content %}
+
+{% if tab %}
+	
+	<b>
+	{% if tab.tabURL %}
+	<a href="{{ tab.tabURL}}">{{ tab.artist }} - {{ tab.songTitle }}</a>
+	{% else %}
+	{{ tab.artist }} - {{ tab.songTitle }}
+	{% endif %}
+	</b>
+	<i>added on {{ tab.addedDate }}</i>
+	({{ tab.get_ability_display }})
+	<div>
+		<p>
+	    	<textarea name="content" cols="100" rows="25">{{ tab.content }}</textarea>
+		</p>
+    </div>
+    <a href="{% url 'edit' tab.id %}">edit</a>
+    <a href="{% url 'delete' tab.id %}">delete</a>
+{% else %}
+    <p>No tab specified</p>
+{% endif %}
+
+
+{% endblock %}

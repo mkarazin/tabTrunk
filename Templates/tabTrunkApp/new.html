@@ -1,0 +1,41 @@
+{% extends 'tabTrunkApp/base.html' %}
+{% load url from future %}
+
+
+{% block content %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/tabs/create/" method="post">
+{% csrf_token  %}
+
+<label for="songTitle">Song Title: </label>
+<input type="text" name="songTitle" id="songTitle" size="30" maxlength="300" tabindex="1"><br>
+
+<label for="artist">Artist: </label>
+<input type="text" name="artist" id="artist" size="30" maxlength="300" tabindex="2"><br>
+
+<label for="tabURL">URL: </label>
+<input type="text" name="tabURL" id="tabURL" size="30" maxlength="300" tabindex="3"><br>	
+
+<label for="ability">Ability: </label>
+<select name="ability" id="ability">
+	{% for ability in abilityChoices %}
+        <option value={{ ability.0 }}>{{ ability.1 }}</option>
+    {% endfor %}
+</select>
+
+<label for="content"></label>
+	<div>
+		<p>
+	    	<textarea name="content" id="content" cols="100" rows="25">{{ tab.content }}</textarea>
+		</p>
+    </div>
+    
+<input name="submit" id="submit" type="submit" value="create" />
+<input name="submit" id="submit" type="submit" value="cancel" />
+
+</form>
+
+{% endblock %}

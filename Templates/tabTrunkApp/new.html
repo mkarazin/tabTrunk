@@ -1,41 +1,76 @@
 {% extends 'tabTrunkApp/base.html' %}
 {% load url from future %}
 
+{% block secondary_nav %}
+    <ul class="nav nav-tabs">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li class="active"><a href="{% url 'new' %}">New</a></li>
+    </ul>
+{% endblock %}
 
 {% block content %}
 
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/tabs/create/" method="post">
-{% csrf_token  %}
 
-<label for="songTitle">Song Title: </label>
-<input type="text" name="songTitle" id="songTitle" size="30" maxlength="300" tabindex="1"><br>
 
-<label for="artist">Artist: </label>
-<input type="text" name="artist" id="artist" size="30" maxlength="300" tabindex="2"><br>
 
-<label for="tabURL">URL: </label>
-<input type="text" name="tabURL" id="tabURL" size="30" maxlength="300" tabindex="3"><br>	
+    <form action="/tabs/create/" method="post" class="form-horizontal" id="createform" accept-charset="utf-8">
+        {% csrf_token  %}
+        <div class="control-group">
+            <label for="songTitle" class="control-label">
+                Song Title
+            </label>
+            <div class="controls">
+                <input name="songTitle" type="text" value="" id="songTitle" maxlength="300" tabindex="1" class="input-block-level">
+            </div>
+        </div>
 
-<label for="ability">Ability: </label>
-<select name="ability" id="ability">
-	{% for ability in abilityChoices %}
-        <option value={{ ability.0 }}>{{ ability.1 }}</option>
-    {% endfor %}
-</select>
+        <div class="control-group">
+            <label for="artist" class="control-label">
+                Artist
+            </label>
+            <div class="controls">
+                <input name="artist" type="text" value="" id="artist" maxlength="300" tabindex="2" class="input-block-level">
+            </div>
+        </div>
 
-<label for="content"></label>
-	<div>
-		<p>
-	    	<textarea name="content" id="content" cols="100" rows="25">{{ tab.content }}</textarea>
-		</p>
-    </div>
-    
-<input name="submit" id="submit" type="submit" value="create" />
-<input name="submit" id="submit" type="submit" value="cancel" />
+        <div class="control-group">
+            <label for="tabURL" class="control-label">
+                Url
+            </label>
+            <div class="controls">
+                <input name="tabURL" type="text" value="" id="tabURL" maxlength="300" tabindex="3" class="input-block-level">
+            </div>
+        </div>
 
-</form>
+        <div class="control-group">
+            <label for="ability" class="control-label">
+                Ability
+            </label>
+            <div class="controls">
+                <select name="ability" id="ability" class="input-block-level">
+                    {% for ability in abilityChoices %}
+                        <option value={{ ability.0 }}>{{ ability.1 }}</option>
+                    {% endfor %}
+                 </select>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="content" class="control-label">
+                Content
+            </label>
+            <div class="controls">
+                <textarea name="content" id="content" cols="200" rows="10" class="input-block-level">{{ tab.content }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input name="submit" id="submit" type="submit" value="create" class="btn btn-large btn-success"/>
+            <input name="submit" id="submit" type="submit" value="cancel" class="btn btn-large btn-danger"/>
+        </div>
+    </form>
 
 {% endblock %}

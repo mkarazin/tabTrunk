@@ -1,60 +1,74 @@
 {% extends 'tabTrunkApp/base.html' %}
 {% load url from future %}
 
-{% block optional_scripts %}
-<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#tabTable').dataTable();
-			} );
-		</script>
+{% block optionalCSS %}
+    <link href="{{ STATIC_URL }}css/jquery.dataTables.css" rel="stylesheet" media="screen">
 {% endblock %}
+
+{% block optionalScripts %}
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="JavaScript">
+$(document).ready(function() {
+    /*
+    $('#tabTable').dataTable( {
+        "sDom": '<"toolbar">frtip'
+    } );
+    $("div.toolbar").html('');
+    } );
+    */
+    //$('#tabTable').dataTable()
+    $(document).ready(function() {
+        $('#tabTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": true,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "sDom": '<"toolbar">frtip'
+        } );
+        //$("div.toolbar").html('');
+    } );
+
+});
+    </script>
+{% endblock %}
+
+
+
 
 {% block content %}
 
-<a href="{% url 'new' %}">new</a>
 {% if tab_list %}
-    <ul>
-    {% for tab in tab_list %}
-        <li><a href="{% url 'detail' tab.id %}">{{ tab.songTitle }}</a></li>
-    {% endfor %}
-    </ul>
-    <div class="container" style="margin-top: 10px">
-		<div id="tabTable_wrapper" class="dataTables_wrapper form-inline" role="grid">
-			<div class="span6">
-				<div id="example_length" class="dataTables_length">
-				<label>
-				<select size="1" name="example_length" aria-controls="example">
-					<option value="10" selected="selected">10</option>
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-				</select>
-				records per page
-				</label>
-				</div>
-			</div>
-			<table id="tabTable">
-				<thread>
-					<tr>
-						<th>Artist</th>
-						<th>Song Title</th>
-						<th>Ability</th>
-					 </tr>
-				</thead>
-				<tbody>
-					{% for tab in tab_list %}
-					<tr>
-						<td>{{ tab.artist }}<td>
-						<td>{{ tab.songTitle }}</td>
-						<td>{{ tab.get_ability_display }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>    
-			</table>
-		</div>
+
+    <table id="tabTable" class="table table-striped">
+        <thead>
+        <tr>
+            <td></td>
+            <td>Artist</td>
+            <td>Song Title</td>
+            <td>Ability</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for tab in tab_list %}
+                <tr>
+                    <td><a href="{% url 'detail' tab.id %}">view</a></td>
+                    <td>{{ tab.artist }}</td>
+                    <td>{{ tab.songTitle }}</td>
+                    <td>{{ tab.get_ability_display }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="">
+        &nbsp;
+        <a class="btn btn-medium btn-success pull-right" href="{% url 'new' %}">New</a>
     </div>
-    
+
+
+
 {% else %}
     <p>No tabs are available.</p>
 {% endif %}

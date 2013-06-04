@@ -17,21 +17,23 @@ def index(request):
                   context_instance=RequestContext(request),)
 @login_required
 def detail(request, tab_id):
+    # TODO: Add user specific protections (ie if tab.username = request.username)
     tab = get_object_or_404(Tab, pk=tab_id)
     return render(request, 'tabTrunkApp/view.html', {'tab': tab},
                   context_instance=RequestContext(request),)
 
 @login_required
 def edit(request, tab_id):
+    # TODO: Add user specific protections (ie if tab.username = request.username)
     tab = get_object_or_404(Tab, pk=tab_id)
     tabAbility = tab.get_ability_display()
 
     if request.POST:
         if request.POST['submit'] == 'save':
             tab.songTitle = request.POST['songTitle']
-            tab.artist=request.POST['artist']
-            tab.tabURL=request.POST['tabURL']
-            tab.content=request.POST['content']
+            tab.artist = request.POST['artist']
+            tab.tabURL = request.POST['tabURL']
+            tab.content = request.POST['content']
             tab.save()
         return render(request, 'tabTrunkApp/view.html', {'tab':tab},
                       context_instance=RequestContext(request),)
@@ -65,6 +67,7 @@ def create(request):
 
 @login_required
 def delete(request, tab_id):
+    # TODO: Add user specific protections (ie if tab.username = request.username)
     tab = get_object_or_404(Tab, pk=tab_id)
 
     if request.POST:

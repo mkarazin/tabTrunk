@@ -15,12 +15,16 @@ v 0.2
 	ability is an attribute of Tab now 	- done 5/23/13
 	authentication (no registration) - done 5/26/13
 	base template - done 5/26/13
-	tabular view of tabs
+
+Launched on Amazon ec2 6/2/2013
+
+
 
 
 
 Future Versions
 
+	tabular view of tabs
 	tabs belong to a user, not system
 	new UI (jquery + css)
 	branding

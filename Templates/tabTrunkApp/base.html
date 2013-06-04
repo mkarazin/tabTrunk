@@ -3,39 +3,74 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>
-{% block head_title %}
-TAB TRUNK
-{% endblock %}
-</title>
+    <title>
+    {% block head_title %}
+    TAB TRUNK
+    {% endblock %}
+    </title>
 
-{% block main_scripts %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block mainCSS %}
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="{{ STATIC_URL }}css/tabTrunk.css" rel="stylesheet" media="screen">
+    {% endblock %}
+
+    {% block optionalCSS %}
+
+    {% endblock %}
+
+{% block mainScripts %}
 <!--
-<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery-2.0.1.js"></script>
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/jquery-2.0.1.js"></script>
 -->
-<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}javascript/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 {% endblock %}
 
-{% block optional_scripts %}
+{% block optionalScripts %}
+
 {% endblock %}
 
 </head>
 
 
 <body>
+<div class="container-narrow">
 
-{% block top_nav %}
-<a href="{% url 'index' %}">home</a> | <a href="/accounts/logout/">logout</a>
-{% endblock %}
-<hr>
+    {% block top_nav %}
 
-{% block content %}
+          <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+              <li><a href="/accounts/logout/">Logout <i class="icon-off"></i></a></li>
+            </ul>
+            <h3 class="muted">tabTrunk</h3>
+          </div>
 
-{% endblock %}
+    {% endblock %}
 
-<hr>
-{% block footer %}
-tabTrunk
-{% endblock %} 
+    {% block secondary_nav %}
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'new' %}">New</a></li>
+        </ul>
+    {% endblock %}
+
+    {% block error_msg %}
+    {% endblock %}
+
+    {% block msg %}
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    <hr>
+    {% block footer %}
+    tabTrunk
+    {% endblock %}
+</div>
+
 </body>
 </html>

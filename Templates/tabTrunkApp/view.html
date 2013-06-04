@@ -1,27 +1,41 @@
 {% extends 'tabTrunkApp/base.html' %}
 {% load url from future %}
 
+{% block optional-scripts %}
+
+{% endblock %}
+
+    {% block secondary_nav %}
+        <ul class="nav nav-tabs">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'new' %}">New</a></li>
+            <li class="active"><a href="#">View</a></li>
+        </ul>
+    {% endblock %}
 
 {% block content %}
 
 {% if tab %}
-	
-	<b>
+	<div>
+	<h2>
 	{% if tab.tabURL %}
 	<a href="{{ tab.tabURL}}">{{ tab.artist }} - {{ tab.songTitle }}</a>
 	{% else %}
 	{{ tab.artist }} - {{ tab.songTitle }}
 	{% endif %}
-	</b>
-	<i>added on {{ tab.addedDate }}</i>
-	({{ tab.get_ability_display }})
+	</h2>
+    </div>
 	<div>
+        <i>added on {{ tab.addedDate }}</i>
+	    ({{ tab.get_ability_display }})
+	</div>
+    <div>
 		<p>
-	    	<textarea name="content" cols="100" rows="25">{{ tab.content }}</textarea>
+	    	<textarea name="content" cols="100" rows="20" class="input-block-level">{{ tab.content }}</textarea>
 		</p>
     </div>
-    <a href="{% url 'edit' tab.id %}">edit</a>
-    <a href="{% url 'delete' tab.id %}">delete</a>
+    <a class="btn btn-small btn-primary" href="{% url 'edit' tab.id %}">edit</a>
+    <a class="btn btn-small btn-danger" href="{% url 'delete' tab.id %}">delete</a>
 {% else %}
     <p>No tab specified</p>
 {% endif %}

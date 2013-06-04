@@ -1,22 +1,32 @@
 {% extends 'tabTrunkApp/base.html' %}
 {% load url from future %}
 
+{% block secondary_nav %}
+    <ul class="nav nav-tabs">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'new' %}">New</a></li>
+        <li><a href="{% url 'detail' tab.id %}">View</a></li>
+        <li class="active"><a href="#">Delete</a></li>
+    </ul>
+{% endblock %}
 
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<p>
-Confirm delete of:<br>
+<h2>
+Confirm Delete
+</h2>
+<h3>
 {{ tab.songTitle }} - {{ tab.artist }}<br>
-</p>
+</h3>
 
 <p>
 <form action="/tabs/delete/{{ tab.id }}/" method="post">
 {% csrf_token  %}
 
-<input name="submit" id="submit" type="submit" value="delete" />
-<input name="submit" id="submit" type="submit" value="cancel" />
+<input name="submit" id="submit" type="submit" value="delete" class="btn btn-medium btn-danger" />
+<input name="submit" id="submit" type="submit" value="cancel" class="btn btn-medium btn-primary" />
 </form>
 </p>
 

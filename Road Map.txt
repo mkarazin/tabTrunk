@@ -18,15 +18,15 @@ v 0.2
 
 Launched on Amazon ec2 6/2/2013
 
-
+v 0.3
+    tabular view of tabs - done 6/3/2013
+	tabs belong to a user, not system - done 6/3/2013
+	new UI (jquery + css) - done 6/3/2013
 
 
 
 Future Versions
 
-	tabular view of tabs
-	tabs belong to a user, not system
-	new UI (jquery + css)
 	branding
 	minor fixes
-	published!
+

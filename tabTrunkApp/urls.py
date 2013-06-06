@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^delete/(?P<tab_id>\d+)/$', views.delete, name='delete'),
     url(r'^new/$', views.new, name='new'),
     url(r'^create/$', views.create, name='create'),
-
+    url(r'^register/$', views.register, name='register'),
 )

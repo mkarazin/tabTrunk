@@ -4,6 +4,7 @@ from django.template import Context, loader, RequestContext
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from tabTrunkApp.models import Tab
+from django.contrib.auth.models import User
 
 # Users
 from django.contrib.auth.decorators import login_required
@@ -78,3 +79,15 @@ def delete(request, tab_id):
 
     return render(request, 'tabTrunkApp/confirmDelete.html', {'tab': tab},
                   context_instance=RequestContext(request),)
+
+
+def register(request):
+    if request.POST:
+        if request.POST['register'] == 'register':
+            if request.POST['inputPassword'] == request.POST['inputPasswordConfirm']:
+                if request.POST['inputRegistrationCode'] == 'r2d2':
+                    user = User.objects.create_user(username=request.POST['inputUsername'],
+                                                    email=request.POST['inputEmail'],
+                                                    password=request.POST['inputPassword'])
+                    user.save()
+    return index(request)

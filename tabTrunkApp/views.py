@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from tabTrunkApp.models import Tab
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 # Users
 from django.contrib.auth.decorators import login_required
@@ -91,3 +92,18 @@ def register(request):
                                                     password=request.POST['inputPassword'])
                     user.save()
     return index(request)
+
+
+
+@login_required
+def changePassword(request):
+    if request.POST:
+        if request.POST['submit'] == 'submit':
+            if request.POST['inputNewPassword'] == request.POST['inputNewPasswordConfirm']:
+                user = auth.authenticate(username=request.user.username, password=request.POST['inputPassword'])
+                if user is not None and user.is_active:
+                    user.set_password(request.POST['inputNewPassword'])
+                    user.save()
+                    return index(request)
+    return render(request, 'tabTrunkApp/changePassword.html',
+                  context_instance=RequestContext(request),)

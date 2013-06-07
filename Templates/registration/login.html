@@ -2,7 +2,6 @@
 {% load url from future %}
 
 {% block optionalCSS %}
-    <link href="{{ STATIC_URL }}css/jquery.dataTables.css" rel="stylesheet" media="screen">
 {% endblock %}
 
 {% block secondary_nav %}
@@ -104,20 +103,5 @@
         </div>
     </div>
 </div>
-
-
-    <!--
-  <form action="" method="post">
-  {% csrf_token  %}
-
-    <label for="username">User name:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" class="btn btn-success" value="login" />
-    <input type="hidden" name="next" value="{{ next|escape }}" />
-  </form>
--->
 
 {% endblock %}
